@@ -112,16 +112,45 @@ h2{font-size:clamp(1.6rem,3.2vw,2.2rem);font-weight:700;margin-bottom:16px;line-
 .card li::before{content:"›";position:absolute;left:2px;color:var(--green)}
 
 /* works */
-.works{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:860px){.works{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.works{grid-template-columns:1fr}}
-.work{background:rgba(22,27,34,.7);border:1px solid var(--line);border-radius:10px;padding:22px;font-size:.9rem;transition:.2s}
+.wgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.shot{grid-column:span 3;position:relative;border-radius:14px;border:1px solid var(--line);background:var(--bg2);overflow:hidden;transition:.35s;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.shot.big{grid-column:span 6}
+.shot:hover{border-color:var(--line2);transform:translateY(-4px);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.shot .bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);background:rgba(13,17,23,.7);font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.shot .bar i{width:10px;height:10px;border-radius:50%;background:#ff5f56}.shot .bar i:nth-child(2){background:#ffbd2e}.shot .bar i:nth-child(3){background:#27c93f}
+.shot .bar u{text-decoration:none;margin-left:10px;padding:3px 12px;border-radius:6px;background:var(--bg);border:1px solid var(--line);flex:1;max-width:360px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shot .bar u::before{content:"🔒 ";font-size:.6rem}
+.shot .img{position:relative;aspect-ratio:16/10;overflow:hidden;background:#000}
+.shot.big .img{aspect-ratio:21/9}
+.shot.big .img img{object-position:center 35%}
+.shot.big .meta{display:grid;grid-template-columns:1fr 1fr;gap:6px 32px;align-items:start}
+.shot.big .meta .cat{grid-column:1/-1}
+.shot.big .meta p{grid-column:2;grid-row:2/4}
+.shot.big .meta h3{grid-column:1}
+.shot.big .meta .tags{grid-column:1;margin-top:4px}
+@media(max-width:700px){.shot.big .meta{display:block}}
+.shot .img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transform:scale(1.02);transition:transform 1.2s ease}
+.shot:hover .img img{transform:scale(1.06) translateY(-1.5%)}
+.shot .img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,rgba(13,17,23,.55) 100%)}
+.shot .meta{padding:20px 24px 24px;border-top:1px solid var(--line)}
+.shot .cat{font-family:var(--mono);font-size:.7rem;color:var(--green);margin-bottom:6px}
+.shot h3{font-size:1.15rem;font-weight:700;line-height:1.4;margin-bottom:6px}
+.shot.big h3{font-size:1.45rem}
+.shot p{color:var(--fg2);font-size:.85rem;max-width:560px}
+.shot .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tags span{font-family:var(--mono);font-size:.68rem;color:var(--blue);background:rgba(88,166,255,.1);border:1px solid rgba(88,166,255,.25);padding:1px 8px;border-radius:99px;backdrop-filter:blur(4px)}
+.shot .live{position:absolute;top:12px;right:12px;z-index:1;font-family:var(--mono);font-size:.66rem;color:var(--green);background:rgba(13,17,23,.75);border:1px solid rgba(63,185,80,.4);padding:3px 9px;border-radius:99px;display:flex;align-items:center;gap:6px}
+.shot .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 1.6s infinite}
+.work{grid-column:span 2;background:rgba(22,27,34,.7);border:1px solid var(--line);border-radius:12px;padding:22px;font-size:.9rem;transition:.2s;position:relative}
+.work::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:2px;background:var(--line2);border-radius:2px}
 .work:hover{border-color:var(--line2);background:rgba(28,33,41,.9)}
-.work .cat{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-bottom:8px}
+.work .cat{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-bottom:8px}
+.work .cat::after{content:" · internal";color:var(--line2)}
 .work h3{font-size:1rem;font-weight:700;margin-bottom:8px;line-height:1.5}
 .work p{color:var(--muted);font-size:.85rem}
 .work .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.work .tags span{font-family:var(--mono);font-size:.68rem;color:var(--blue);background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.2);padding:1px 8px;border-radius:99px}
+@media(max-width:860px){.shot{grid-column:span 6}.work{grid-column:span 3}.shot.big .img{aspect-ratio:16/10}}
+@media(max-width:560px){.work{grid-column:span 6}}
 
 /* approach */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
@@ -264,13 +293,28 @@ footer a:hover{color:var(--fg)}
 <section id="works"><div class="wrap">
   <div class="h2 rv">works</div>
   <h2 class="rv">Recent work</h2>
-  <p class="sub rv">すべて要件定義から本番リリースまで一人で担当。守秘のため社名は伏せています。</p>
-  <div class="works">
-    <div class="work rv"><div class="cat">web / ai</div><h3>美容医療クリニック公式サイト</h3><p>撮影・デザイン・実装・公開まで。CMS更新の自動反映、AIチャットボット、写真診断を搭載。</p><div class="tags"><span>Next.js</span><span>microCMS</span><span>AI SDK</span></div></div>
-    <div class="work rv"><div class="cat">system</div><h3>クリニック管理画面・採用管理</h3><p>コンテンツCRUDとAIによる応募者スコアリング。全ルートを認証でガード。</p><div class="tags"><span>Supabase</span><span>Gemini</span></div></div>
-    <div class="work rv"><div class="cat">system / data</div><h3>経営分析ダッシュボード</h3><p>日計表CSVを解析して来院・成約を可視化。PDF帳票出力まで。</p><div class="tags"><span>Recharts</span><span>PapaParse</span></div></div>
-    <div class="work rv"><div class="cat">system</div><h3>学習プラットフォーム</h3><p>AIプログラミングスクールの受講生UIと運営管理。課題のAI一次レビューを実装。</p><div class="tags"><span>Next.js</span><span>Supabase RLS</span><span>Vimeo</span></div></div>
-    <div class="work rv"><div class="cat">system</div><h3>勤怠・請求書システム</h3><p>業務委託メンバーの打刻から請求書生成まで。トランザクションで整合性を担保。</p><div class="tags"><span>Firebase</span><span>Server Actions</span></div></div>
+  <p class="sub rv">すべて要件定義から本番リリースまで一人で担当。公開中のものは実際の本番画面、社内ツールは守秘のため文字だけで紹介しています。</p>
+  <div class="wgrid">
+    <a class="shot big rv" href="https://mpureju.com/" target="_blank" rel="noopener">
+      <div class="bar"><i></i><i></i><i></i><u>mpureju.com</u></div>
+      <div class="img"><img src="works/clinic.jpg" alt="美容医療クリニック公式サイトのトップページ" loading="lazy"><span class="live">live</span></div>
+      <div class="meta"><div class="cat">web / ai — 銀座の美容外科・美容皮膚科</div><h3>クリニック公式サイト</h3><p>撮影・デザイン・実装・公開まで一人で担当。CMS更新の自動反映、料金や症例を自分で調べて答えるAIチャットボット、写真診断を搭載。</p>
+        <div class="tags"><span>Next.js</span><span>microCMS</span><span>Vercel AI SDK</span><span>Gemini</span></div></div>
+    </a>
+    <a class="shot rv" href="https://intention-group.co.jp/" target="_blank" rel="noopener">
+      <div class="bar"><i></i><i></i><i></i><u>intention-group.co.jp</u></div>
+      <div class="img"><img src="works/intention.jpg" alt="AI導入支援企業のコーポレートサイト" loading="lazy"><span class="live">live</span></div>
+      <div class="meta"><div class="cat">web — AI導入支援企業</div><h3>コーポレートサイト</h3><p>サービス訴求からAIチャット導線まで。</p>
+        <div class="tags"><span>Next.js</span><span>Tailwind</span></div></div>
+    </a>
+    <div class="shot rv">
+      <div class="bar"><i></i><i></i><i></i><u>app — members only</u></div>
+      <div class="img"><img src="works/skillboost.jpg" alt="AIプログラミングスクールの学習プラットフォーム" loading="lazy"></div>
+      <div class="meta"><div class="cat">system / ai — プログラミングスクール</div><h3>学習プラットフォーム</h3><p>受講生UIと運営管理を1から構築。課題のAI一次レビュー付き。</p>
+        <div class="tags"><span>Supabase RLS</span><span>Vimeo</span><span>DeepSeek</span></div></div>
+    </div>
+    <div class="work rv"><div class="cat">system / data</div><h3>経営分析ダッシュボード</h3><p>クリニックの日計表CSVを解析して来院・成約を可視化。PDF帳票出力まで。</p><div class="tags"><span>Recharts</span><span>PapaParse</span></div></div>
+    <div class="work rv"><div class="cat">system</div><h3>広告運用ダッシュボード</h3><p>Meta広告の実績を毎朝自動取得し、改善すべき商材をAIが要約して提示。</p><div class="tags"><span>Meta API</span><span>Claude</span></div></div>
     <div class="work rv"><div class="cat">ai</div><h3>社内AIプラットフォーム</h3><p>構想設計から構築まで。社内ナレッジを横断するAIアシスタントと業務エージェント。</p><div class="tags"><span>Claude</span><span>Agents</span></div></div>
   </div>
 </div></section>
