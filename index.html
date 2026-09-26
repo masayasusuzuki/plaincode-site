@@ -3,102 +3,247 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>plaincode</title>
-<meta name="description" content="plaincode は、色のないコーディングをします。流行りの技術ではなく、あなたの課題に最も素直な実装を選びます。AI導入支援・HP制作・システム開発・動画制作。">
+<title>plaincode — AI導入・システム開発・動画制作・AI研修</title>
+<meta name="description" content="plaincode（プレインコード）は、AI導入支援・Webサイト/業務システム開発・動画制作・AI研修を一人で一気通貫で行う東京のエンジニアリングスタジオです。流行りではなく、課題に最も素直な実装を選びます。">
 <link rel="canonical" href="https://plaincode.work/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
-<meta property="og:title" content="plaincode">
-<meta property="og:description" content="色のないコーディングをします。">
+<meta property="og:title" content="plaincode — ただ、コードを書く。">
+<meta property="og:description" content="AI導入・システム開発・動画制作・AI研修。作る・売る・教えるを一人で一気通貫。">
 <meta property="og:url" content="https://plaincode.work/">
 <meta property="og:image" content="https://plaincode.work/og.png">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@masakundayo1994">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#ffffff;--fg:#111111;--muted:#6b6b6b;--line:#e5e5e5;--accent:#111111;
-}
-@media (prefers-color-scheme:dark){
-  :root{--bg:#0d1117;--fg:#c9d1d9;--muted:#8b949e;--line:#30363d;--accent:#f0f6fc;}
+  --bg:#0d1117;--bg2:#161b22;--fg:#e6edf3;--muted:#8b949e;--line:#30363d;
+  --green:#3fb950;--orange:#ffa657;--blue:#58a6ff;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --sans:"Noto Sans JP",system-ui,-apple-system,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;-webkit-text-size-adjust:100%}
-body{
-  background:var(--bg);color:var(--fg);
-  font-family:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
-  line-height:1.8;
-  padding:0 16px;
-}
-main{max-width:640px;margin:0 auto;padding:12vh 0 8vh}
-header h1{font-size:1rem;font-weight:400;letter-spacing:.02em}
-header h1 span{color:var(--muted)}
-.lead{margin-top:3rem;font-size:1.05rem}
-.lead p{margin-bottom:1.2rem}
-section{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--line)}
-h2{font-size:.85rem;font-weight:400;color:var(--muted);margin-bottom:1.2rem}
-h2::before{content:"// "}
-pre{white-space:pre;overflow-x:auto;font-size:.95rem;line-height:1.7}
-.k{color:var(--muted)}
-ul{list-style:none}
-li{margin-bottom:.4rem}
-a{color:var(--fg);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:.25em}
-a:hover{text-decoration-color:var(--fg)}
-dl{display:grid;grid-template-columns:8em 1fr;row-gap:.4rem}
-dt{color:var(--muted)}
-footer{margin-top:5rem;font-size:.8rem;color:var(--muted)}
-@media (max-width:480px){dl{grid-template-columns:1fr}dt{margin-top:.6rem}}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.9;font-size:16px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+.mono{font-family:var(--mono)}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:rgba(13,17,23,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+nav .logo{font-family:var(--mono);font-weight:500;letter-spacing:.02em}
+nav .logo::after{content:"_";color:var(--green);animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+nav ul{display:flex;gap:22px;list-style:none;font-family:var(--mono);font-size:.82rem;color:var(--muted)}
+nav a:hover{color:var(--fg)}
+@media(max-width:600px){nav ul{display:none}}
+
+/* hero */
+.hero{padding:110px 0 90px;border-bottom:1px solid var(--line)}
+.hero .tag{font-family:var(--mono);color:var(--green);font-size:.85rem;margin-bottom:22px}
+.hero h1{font-family:var(--mono);font-weight:500;font-size:clamp(2.3rem,6vw,4rem);line-height:1.15;letter-spacing:-.01em}
+.hero h1 small{display:block;font-family:var(--sans);font-weight:400;font-size:clamp(1.05rem,2.4vw,1.4rem);color:var(--muted);margin-top:18px;letter-spacing:0}
+.hero p{max-width:600px;margin-top:34px;color:#c9d1d9}
+.hero .cta{display:inline-flex;align-items:center;gap:10px;margin-top:40px;padding:12px 20px;border:1px solid var(--line);border-radius:6px;font-family:var(--mono);font-size:.9rem;transition:.2s}
+.hero .cta:hover{border-color:var(--green);color:var(--green)}
+
+/* sections */
+section{padding:90px 0;border-bottom:1px solid var(--line)}
+.h2{font-family:var(--mono);font-size:.85rem;color:var(--muted);margin-bottom:14px}
+.h2::before{content:"// "}
+h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;margin-bottom:40px;line-height:1.4}
+
+/* services */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:28px;transition:.2s}
+.card:hover{border-color:#484f58;transform:translateY(-2px)}
+.card .fn{font-family:var(--mono);font-size:.85rem;color:var(--orange);margin-bottom:10px}
+.card .fn span{color:var(--blue)}
+.card h3{font-size:1.15rem;font-weight:700;margin-bottom:12px}
+.card p{color:#c9d1d9;font-size:.95rem}
+.card ul{margin-top:14px;padding-left:0;list-style:none;font-size:.88rem;color:var(--muted)}
+.card li::before{content:"– ";color:var(--line)}
+
+/* approach */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:700px){.steps{grid-template-columns:1fr}}
+.step{padding:24px;border-left:2px solid var(--line)}
+.step .n{font-family:var(--mono);color:var(--green);font-size:.85rem;margin-bottom:8px}
+.step h3{font-size:1.05rem;margin-bottom:8px}
+.step p{color:var(--muted);font-size:.92rem}
+
+/* code block */
+pre{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:24px;overflow-x:auto;font-family:var(--mono);font-size:.9rem;line-height:1.75;margin-top:40px}
+.c{color:var(--muted)}.k{color:#ff7b72}.t{color:var(--blue)}.s{color:#a5d6ff}
+
+/* facts */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:700px){.facts{grid-template-columns:repeat(2,1fr)}}
+.fact{padding:20px 0;border-top:1px solid var(--line)}
+.fact .v{font-family:var(--mono);font-size:1.7rem;color:var(--fg)}
+.fact .v em{font-style:normal;color:var(--green)}
+.fact .l{font-size:.85rem;color:var(--muted)}
+
+/* about */
+.about{display:grid;grid-template-columns:1.2fr 1fr;gap:40px}
+@media(max-width:700px){.about{grid-template-columns:1fr}}
+.about p{color:#c9d1d9;margin-bottom:16px}
+dl{display:grid;grid-template-columns:7em 1fr;row-gap:10px;font-size:.95rem}
+dt{color:var(--muted);font-family:var(--mono);font-size:.85rem;padding-top:3px}
+dd a{border-bottom:1px solid var(--line)}
+dd a:hover{border-color:var(--fg)}
+
+/* contact */
+.contact{text-align:center;padding:110px 0}
+.contact p{color:var(--muted);margin:0 auto 34px;max-width:520px}
+.btn{display:inline-block;padding:14px 28px;background:var(--fg);color:var(--bg);border-radius:6px;font-family:var(--mono);font-weight:500;transition:.2s}
+.btn:hover{background:var(--green)}
+.contact .sub{margin-top:20px;font-family:var(--mono);font-size:.85rem}
+.contact .sub a{color:var(--muted)}.contact .sub a:hover{color:var(--fg)}
+
+footer{padding:36px 0;font-family:var(--mono);font-size:.8rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </style>
 </head>
 <body>
-<main>
-<header>
-  <h1>plaincode <span>— ただ、コードを書く。</span></h1>
-</header>
 
-<div class="lead">
-  <p>plaincode は、色のないコーディングをします。</p>
-  <p>流行りの技術やベンダーの流儀ではなく、あなたの課題に最も素直な実装を選びます。難しい言葉で見せかけず、中身だけを分かりやすく届けます。</p>
-</div>
-
-<section>
-  <h2>services</h2>
-<pre><span class="k">interface</span> Services {
-  ai():     Solution  <span class="k">// AI導入支援・業務自動化</span>
-  web():    Site      <span class="k">// Webサイト・LP制作</span>
-  system(): Software  <span class="k">// 業務システム・ツール開発</span>
-  video():  Film      <span class="k">// 動画制作（応相談）</span>
-}</pre>
-</section>
-
-<section>
-  <h2>approach</h2>
+<nav><div class="wrap">
+  <a class="logo" href="#">plaincode</a>
   <ul>
-    <li>- 業務の整理から実装、使い方の定着まで一気通貫で伴走します</li>
-    <li>- 言語・フレームワーク・LLM は「動くか」「分かるか」で選びます</li>
-    <li>- 作ったコードは全て納品し、ブラックボックスにしません</li>
+    <li><a href="#services">services</a></li>
+    <li><a href="#approach">approach</a></li>
+    <li><a href="#about">about</a></li>
+    <li><a href="#contact">contact</a></li>
   </ul>
-</section>
+</div></nav>
 
-<section>
-  <h2>about</h2>
-  <dl>
-    <dt>屋号</dt><dd>plaincode（プレインコード）</dd>
-    <dt>代表</dt><dd>鈴木 元康 / Masayasu Suzuki</dd>
-    <dt>所在地</dt><dd>東京都</dd>
-    <dt>設立</dt><dd>2026年6月（個人事業として開業）</dd>
-  </dl>
-</section>
+<header class="hero"><div class="wrap">
+  <div class="tag">$ plaincode --version 2026.6.1</div>
+  <h1>ただ、コードを書く。<small>AI導入・システム開発・動画制作・AI研修を、一人で一気通貫。</small></h1>
+  <p>plaincode は、色のないコーディングをします。流行りの技術やベンダーの流儀ではなく、あなたの課題に最も素直な実装を選び、業務の整理から実装、そして使い方が定着するところまで伴走します。</p>
+  <a class="cta" href="#contact">相談する <span>→</span></a>
+</div></header>
 
-<section>
-  <h2>contact</h2>
-  <dl>
-    <dt>mail</dt><dd><a href="mailto:masayasusuzuki@plaincode.work">masayasusuzuki@plaincode.work</a></dd>
-    <dt>X</dt><dd><a href="https://x.com/masakundayo1994" rel="me noopener" target="_blank">@masakundayo1994</a></dd>
-    <dt>GitHub</dt><dd><a href="https://github.com/masayasusuzuki" rel="me noopener" target="_blank">masayasusuzuki</a></dd>
-  </dl>
-</section>
+<section id="services"><div class="wrap">
+  <div class="h2">services</div>
+  <h2>できること</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="fn">ai(): <span>Solution</span></div>
+      <h3>AI導入・業務自動化</h3>
+      <p>社内AIプラットフォームの構想設計から構築まで。日々の作業をAIエージェントやチャットボットに任せ、人がやるべき仕事に時間を戻します。</p>
+      <ul>
+        <li>社内向けAIアシスタント／ナレッジ検索の構築</li>
+        <li>Slack・Discord 常駐エージェント、スプレッドシート×LLM の自動化</li>
+        <li>AIチャットボット・画像診断など既存サービスへのAI機能追加</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="fn">system(): <span>Software</span></div>
+      <h3>Webサイト・業務システム開発</h3>
+      <p>企業サイトから管理画面、勤怠・請求、学習プラットフォームまで。フロント・バックエンド・DB・認証・インフラを一人で設計し、本番まで運びます。</p>
+      <ul>
+        <li>Next.js / React / TypeScript による高速なWebサイト・LP</li>
+        <li>Supabase・Firebase を使った業務システム・管理画面</li>
+        <li>CMS連携、SEO、Vercel での本番運用まで</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="fn">video(): <span>Film</span></div>
+      <h3>動画制作・YouTube運用</h3>
+      <p>YouTube向け編集を100本以上納品。構成・編集・テロップから、生成AIを使った素材づくりまで。広告動画やチャンネル運用の伴走も行います。</p>
+      <ul>
+        <li>YouTube・Shorts・広告動画の編集（Premiere Pro / After Effects）</li>
+        <li>生成AI（画像・動画・音声）を組み込んだ制作</li>
+        <li>企画・KPI設計から改善提案まで</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="fn">teach(): <span>Training</span></div>
+      <h3>AI研修・教育</h3>
+      <p>法人研修の設計から登壇、大学での特別講義、プログラミングスクールの講師・教材制作まで。「作れる人」が教えるから、現場で使える形で定着します。</p>
+      <ul>
+        <li>企業向け 生成AI・Claude Code 活用研修（100名規模の実績）</li>
+        <li>AIプログラミング講座の講師・カリキュラム／教材動画制作</li>
+        <li>導入後の社内定着支援</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
 
-<footer>© 2026 plaincode</footer>
-</main>
+<section id="approach"><div class="wrap">
+  <div class="h2">approach</div>
+  <h2>作る・売る・教える、を一人で</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="n">01</div>
+      <h3>業務を整理する</h3>
+      <p>ツールの話より先に、どこに時間が溶けているかを一緒に見ます。作らない、という結論も普通にあります。</p>
+    </div>
+    <div class="step">
+      <div class="n">02</div>
+      <h3>素直に実装する</h3>
+      <p>言語・フレームワーク・LLM は「動くか」「分かるか」で選びます。コードは全て納品し、ブラックボックスにしません。</p>
+    </div>
+    <div class="step">
+      <div class="n">03</div>
+      <h3>使える形で残す</h3>
+      <p>マニュアルと研修まで含めて、担当者が自分で回せる状態にしてから手を離します。</p>
+    </div>
+  </div>
+<pre><span class="k">interface</span> <span class="t">Plaincode</span> {
+  ai():     <span class="t">Solution</span>   <span class="c">// AI導入・業務自動化</span>
+  system(): <span class="t">Software</span>   <span class="c">// Webサイト・業務システム</span>
+  video():  <span class="t">Film</span>       <span class="c">// 動画制作・YouTube</span>
+  teach():  <span class="t">Training</span>   <span class="c">// AI研修・教育</span>
+}
+<span class="c">// ✔ all passed — 全部、一人で動くところまで。</span></pre>
+</div></section>
+
+<section><div class="wrap">
+  <div class="h2">facts</div>
+  <div class="facts">
+    <div class="fact"><div class="v"><em>1</em>人</div><div class="l">要件定義から本番リリースまで</div></div>
+    <div class="fact"><div class="v"><em>100</em>+</div><div class="l">納品した動画本数</div></div>
+    <div class="fact"><div class="v"><em>100</em>名</div><div class="l">法人研修の登壇規模</div></div>
+    <div class="fact"><div class="v"><em>2</em>系統</div><div class="l">SQL / NoSQL 両DBを本番運用</div></div>
+  </div>
+</div></section>
+
+<section id="about"><div class="wrap">
+  <div class="h2">about</div>
+  <h2>plaincode について</h2>
+  <div class="about">
+    <div>
+      <p>Claude Code、Codex、Kimi。AIコーディングツールにはそれぞれの「色」があります。plaincode はその色を全部落として、ただ単純にコードを書くことに向き合うために作った屋号です。</p>
+      <p>代表の鈴木元康は、マーケティング・動画制作の現場を経てエンジニアになりました。フロントからインフラ、AI統合まで一人で完結させつつ、教える仕事も続けています。</p>
+    </div>
+    <dl>
+      <dt>屋号</dt><dd>plaincode（プレインコード）</dd>
+      <dt>代表</dt><dd>鈴木 元康 / Masayasu Suzuki</dd>
+      <dt>所在地</dt><dd>東京都</dd>
+      <dt>開業</dt><dd>2026年6月</dd>
+      <dt>stack</dt><dd>TypeScript / Next.js / React / Supabase / Firebase / Vercel / Claude・Gemini・DeepSeek</dd>
+      <dt>links</dt><dd><a href="https://x.com/masakundayo1994" target="_blank" rel="me noopener">X</a> ／ <a href="https://github.com/masayasusuzuki" target="_blank" rel="me noopener">GitHub</a></dd>
+    </dl>
+  </div>
+</div></section>
+
+<section id="contact" class="contact"><div class="wrap">
+  <div class="h2" style="text-align:center">contact</div>
+  <h2>まずは、困っていることを聞かせてください</h2>
+  <p>「これAIでどうにかならない？」の段階で大丈夫です。作るべきかどうかから一緒に考えます。</p>
+  <a class="btn" href="mailto:masayasusuzuki@plaincode.work?subject=%E3%81%94%E7%9B%B8%E8%AB%87">メールで相談する</a>
+  <div class="sub"><a href="mailto:masayasusuzuki@plaincode.work">masayasusuzuki@plaincode.work</a></div>
+</div></section>
+
+<footer class="wrap">
+  <span>© 2026 plaincode</span>
+  <span>Tokyo, Japan</span>
+</footer>
+
 </body>
 </html>
