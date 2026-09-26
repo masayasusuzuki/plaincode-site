@@ -7,6 +7,7 @@
 <meta name="description" content="plaincode（プレインコード）は、AI導入支援・Webサイト/業務システム開発・動画制作・AI研修を一人で一気通貫で行う東京のエンジニアリングスタジオです。流行りではなく、課題に最も素直な実装を選びます。">
 <link rel="canonical" href="https://plaincode.work/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0d1117">
 <meta property="og:type" content="website">
 <meta property="og:title" content="plaincode — ただ、コードを書く。">
 <meta property="og:description" content="AI導入・システム開発・動画制作・AI研修。作る・売る・教えるを一人で一気通貫。">
@@ -16,123 +17,209 @@
 <meta name="twitter:site" content="@masakundayo1994">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"plaincode","url":"https://plaincode.work/","email":"masayasusuzuki@plaincode.work","founder":{"@type":"Person","name":"鈴木元康"},"areaServed":"JP","address":{"@type":"PostalAddress","addressRegion":"東京都","addressCountry":"JP"},"sameAs":["https://x.com/masakundayo1994","https://github.com/masayasusuzuki"]}
+</script>
 <style>
 :root{
-  --bg:#0d1117;--bg2:#161b22;--fg:#e6edf3;--muted:#8b949e;--line:#30363d;
-  --green:#3fb950;--orange:#ffa657;--blue:#58a6ff;
+  --bg:#0d1117;--bg2:#161b22;--bg3:#1c2129;--fg:#e6edf3;--fg2:#c9d1d9;--muted:#8b949e;--line:#30363d;--line2:#484f58;
+  --green:#3fb950;--orange:#ffa657;--blue:#58a6ff;--red:#ff7b72;--purple:#d2a8ff;
   --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
   --sans:"Noto Sans JP",system-ui,-apple-system,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.9;font-size:16px;overflow-x:hidden;overflow-wrap:anywhere}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.9;font-size:16px;overflow-x:hidden;overflow-wrap:anywhere;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;background-position:center top}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(900px 500px at 70% -10%,rgba(63,185,80,.14),transparent 60%),radial-gradient(700px 400px at 0% 40%,rgba(88,166,255,.08),transparent 60%),var(--bg);pointer-events:none}
+body{background-color:transparent}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+::selection{background:rgba(63,185,80,.35)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
 .mono{font-family:var(--mono)}
 
+/* reveal */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
 /* nav */
-nav{position:sticky;top:0;z-index:10;background:rgba(13,17,23,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
-nav .logo{font-family:var(--mono);font-weight:500;letter-spacing:.02em}
+nav{position:sticky;top:0;z-index:10;background:rgba(13,17,23,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+nav .logo{font-family:var(--mono);font-weight:500;letter-spacing:.02em;display:flex;align-items:center;gap:8px}
+nav .logo i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
 nav .logo::after{content:"_";color:var(--green);animation:blink 1.2s steps(2) infinite}
 @keyframes blink{50%{opacity:0}}
-nav ul{display:flex;gap:22px;list-style:none;font-family:var(--mono);font-size:.82rem;color:var(--muted)}
-nav a:hover{color:var(--fg)}
-@media(max-width:600px){nav ul{display:none}}
+nav ul{display:flex;gap:4px;list-style:none;font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+nav ul a{padding:6px 10px;border-radius:6px;transition:.15s}
+nav ul a:hover{color:var(--fg);background:var(--bg2)}
+nav ul a.hot{color:var(--bg);background:var(--green);font-weight:500;margin-left:8px}
+nav ul a.hot:hover{background:#56d364}
+@media(max-width:640px){nav ul li:not(:last-child){display:none}}
 
 /* hero */
-.hero{padding:110px 0 90px;border-bottom:1px solid var(--line)}
-.hero .tag{font-family:var(--mono);color:var(--green);font-size:.85rem;margin-bottom:22px}
-.hero h1{font-family:var(--mono);font-weight:500;font-size:clamp(2.3rem,6vw,4rem);line-height:1.15;letter-spacing:-.01em}
-.hero h1 small{display:block;font-family:var(--sans);font-weight:400;font-size:clamp(1.05rem,2.4vw,1.4rem);color:var(--muted);margin-top:18px;letter-spacing:0}
-.hero p{max-width:600px;margin-top:34px;color:#c9d1d9}
-.hero .cta{display:inline-flex;align-items:center;gap:10px;margin-top:40px;padding:12px 20px;border:1px solid var(--line);border-radius:6px;font-family:var(--mono);font-size:.9rem;transition:.2s}
-.hero .cta:hover{border-color:var(--green);color:var(--green)}
+.hero{padding:120px 0 100px;position:relative}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero{padding:80px 0 70px}}
+.hero .tag{font-family:var(--mono);color:var(--green);font-size:.85rem;margin-bottom:22px;display:flex;gap:10px;align-items:center}
+.hero .tag::before{content:"";width:28px;height:1px;background:var(--green)}
+.hero h1{font-family:var(--mono);font-weight:700;font-size:clamp(2.2rem,4.6vw,3.4rem);line-height:1.12;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--green)}
+.hero h1 small{display:block;font-family:var(--sans);font-weight:400;font-size:clamp(1rem,2.2vw,1.3rem);color:var(--muted);margin-top:20px;letter-spacing:0;line-height:1.7}
+.hero p{max-width:560px;margin-top:30px;color:var(--fg2)}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:38px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:8px;font-family:var(--mono);font-size:.9rem;font-weight:500;transition:.2s;border:1px solid transparent}
+.btn.pri{background:var(--green);color:var(--bg)}
+.btn.pri:hover{background:#56d364;transform:translateY(-1px);box-shadow:0 8px 30px rgba(63,185,80,.25)}
+.btn.sec{border-color:var(--line2);color:var(--fg)}
+.btn.sec:hover{border-color:var(--fg);background:var(--bg2)}
+
+/* terminal */
+.term{background:rgba(22,27,34,.9);border:1px solid var(--line);border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.02) inset;overflow:hidden;font-family:var(--mono);font-size:.82rem;line-height:1.75}
+.term .bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line);background:rgba(13,17,23,.6)}
+.term .bar i{width:11px;height:11px;border-radius:50%;background:#ff5f56}
+.term .bar i:nth-child(2){background:#ffbd2e}.term .bar i:nth-child(3){background:#27c93f}
+.term .bar span{margin-left:auto;color:var(--muted);font-size:.72rem}
+.term pre{padding:18px 20px;white-space:pre;overflow-x:auto;min-height:250px;color:var(--fg2)}
+.term .p{color:var(--green)}.term .c{color:var(--muted)}.term .k{color:var(--red)}.term .t{color:var(--blue)}.term .s{color:#a5d6ff}.term .o{color:var(--orange)}
+.term .cur{display:inline-block;width:8px;height:1em;background:var(--fg);vertical-align:-2px;animation:blink 1s steps(2) infinite}
 
 /* sections */
-section{padding:90px 0;border-bottom:1px solid var(--line)}
-.h2{font-family:var(--mono);font-size:.85rem;color:var(--muted);margin-bottom:14px}
+section{padding:100px 0;position:relative}
+section+section::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(1000px,calc(100% - 40px));height:1px;background:linear-gradient(90deg,transparent,var(--line2),transparent)}
+.h2{font-family:var(--mono);font-size:.85rem;color:var(--green);margin-bottom:14px}
 .h2::before{content:"// "}
-h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;margin-bottom:40px;line-height:1.4}
+h2{font-size:clamp(1.6rem,3.2vw,2.2rem);font-weight:700;margin-bottom:16px;line-height:1.4;letter-spacing:-.01em}
+.sub{color:var(--muted);max-width:620px;margin-bottom:44px}
 
 /* services */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 @media(max-width:700px){.grid{grid-template-columns:1fr}}
-.card{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:28px;transition:.2s}
-.card:hover{border-color:#484f58;transform:translateY(-2px)}
-.card .fn{font-family:var(--mono);font-size:.85rem;color:var(--orange);margin-bottom:10px}
+.card{position:relative;background:linear-gradient(180deg,rgba(28,33,41,.9),rgba(22,27,34,.9));border:1px solid var(--line);border-radius:12px;padding:30px;transition:.25s;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at var(--mx,50%) var(--my,0%),rgba(63,185,80,.12),transparent 60%);opacity:0;transition:.3s}
+.card:hover{border-color:var(--line2);transform:translateY(-3px);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.card:hover::before{opacity:1}
+.card .fn{font-family:var(--mono);font-size:.85rem;color:var(--orange);margin-bottom:12px;display:flex;gap:6px;align-items:center}
+.card .fn b{margin-left:auto}
 .card .fn span{color:var(--blue)}
-.card h3{font-size:1.15rem;font-weight:700;margin-bottom:12px}
-.card p{color:#c9d1d9;font-size:.95rem}
-.card ul{margin-top:14px;padding-left:0;list-style:none;font-size:.88rem;color:var(--muted)}
-.card li::before{content:"– ";color:var(--line)}
+.card .fn b{font-weight:400;color:var(--muted);font-size:.72rem;border:1px solid var(--line);padding:1px 8px;border-radius:99px}
+.card h3{font-size:1.2rem;font-weight:700;margin-bottom:12px}
+.card p{color:var(--fg2);font-size:.95rem}
+.card ul{margin-top:16px;padding-left:0;list-style:none;font-size:.88rem;color:var(--muted)}
+.card li{padding-left:16px;position:relative}
+.card li::before{content:"›";position:absolute;left:2px;color:var(--green)}
+
+/* works */
+.works{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:860px){.works{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.works{grid-template-columns:1fr}}
+.work{background:rgba(22,27,34,.7);border:1px solid var(--line);border-radius:10px;padding:22px;font-size:.9rem;transition:.2s}
+.work:hover{border-color:var(--line2);background:rgba(28,33,41,.9)}
+.work .cat{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-bottom:8px}
+.work h3{font-size:1rem;font-weight:700;margin-bottom:8px;line-height:1.5}
+.work p{color:var(--muted);font-size:.85rem}
+.work .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.work .tags span{font-family:var(--mono);font-size:.68rem;color:var(--blue);background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.2);padding:1px 8px;border-radius:99px}
 
 /* approach */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
 @media(max-width:700px){.steps{grid-template-columns:1fr}}
-.step{padding:24px;border-left:2px solid var(--line)}
-.step .n{font-family:var(--mono);color:var(--green);font-size:.85rem;margin-bottom:8px}
+.step{padding:26px;border:1px solid var(--line);border-radius:12px;background:rgba(22,27,34,.6);position:relative}
+.step .n{font-family:var(--mono);color:var(--green);font-size:.8rem;margin-bottom:10px}
 .step h3{font-size:1.05rem;margin-bottom:8px}
 .step p{color:var(--muted);font-size:.92rem}
-
-/* code block */
-pre{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:24px;overflow-x:auto;font-family:var(--mono);font-size:.9rem;line-height:1.75;margin-top:40px}
-.c{color:var(--muted)}.k{color:#ff7b72}.t{color:var(--blue)}.s{color:#a5d6ff}
+.step::after{content:"→";position:absolute;right:-16px;top:50%;transform:translateY(-50%);color:var(--line2);font-family:var(--mono);z-index:1}
+.step:last-child::after{display:none}
+@media(max-width:700px){.step::after{display:none}}
 
 /* facts */
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 @media(max-width:700px){.facts{grid-template-columns:repeat(2,1fr)}}
-.fact{padding:20px 0;border-top:1px solid var(--line)}
-.fact .v{font-family:var(--mono);font-size:1.7rem;color:var(--fg)}
+.fact{padding:22px 0;border-top:1px solid var(--line)}
+.fact .v{font-family:var(--mono);font-size:2rem;color:var(--fg);line-height:1.2}
 .fact .v em{font-style:normal;color:var(--green)}
-.fact .l{font-size:.85rem;color:var(--muted)}
+.fact .l{font-size:.85rem;color:var(--muted);margin-top:6px}
 
 /* about */
-.about{display:grid;grid-template-columns:1.2fr 1fr;gap:40px}
+.about{display:grid;grid-template-columns:1.2fr 1fr;gap:48px}
 @media(max-width:700px){.about{grid-template-columns:1fr}}
-.about p{color:#c9d1d9;margin-bottom:16px}
-dl{display:grid;grid-template-columns:7em 1fr;row-gap:10px;font-size:.95rem}
-dt{color:var(--muted);font-family:var(--mono);font-size:.85rem;padding-top:3px}
-dd a{border-bottom:1px solid var(--line)}
+.about p{color:var(--fg2);margin-bottom:16px}
+dl{display:grid;grid-template-columns:6.5em 1fr;row-gap:12px;font-size:.95rem;align-content:start}
+dt{color:var(--muted);font-family:var(--mono);font-size:.82rem;padding-top:4px}
+dd a{border-bottom:1px solid var(--line2)}
 dd a:hover{border-color:var(--fg)}
+.stack{display:flex;flex-wrap:wrap;gap:6px}
+.stack span{font-family:var(--mono);font-size:.72rem;color:var(--fg2);background:var(--bg2);border:1px solid var(--line);padding:2px 9px;border-radius:6px}
 
 /* contact */
-.contact{text-align:center;padding:110px 0}
-.contact p{color:var(--muted);margin:0 auto 34px;max-width:520px}
-.btn{display:inline-block;padding:14px 28px;background:var(--fg);color:var(--bg);border-radius:6px;font-family:var(--mono);font-weight:500;transition:.2s}
-.btn:hover{background:var(--green)}
-.contact .sub{margin-top:20px;font-family:var(--mono);font-size:.85rem}
-.contact .sub a{color:var(--muted)}.contact .sub a:hover{color:var(--fg)}
+.contact .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+@media(max-width:860px){.contact .wrap{grid-template-columns:1fr}}
+.contact .side p{color:var(--muted);margin-bottom:22px}
+.contact .side ul{list-style:none;font-size:.9rem;color:var(--fg2)}
+.contact .side li{padding-left:18px;position:relative;margin-bottom:6px}
+.contact .side li::before{content:"✔";position:absolute;left:0;color:var(--green);font-family:var(--mono)}
+.contact .alt{margin-top:28px;font-family:var(--mono);font-size:.82rem;color:var(--muted)}
+.contact .alt a{color:var(--fg2);border-bottom:1px solid var(--line2)}
+form{background:rgba(22,27,34,.9);border:1px solid var(--line);border-radius:12px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.f2{grid-template-columns:1fr}}
+label{display:block;font-family:var(--mono);font-size:.75rem;color:var(--muted);margin:0 0 6px}
+label b{color:var(--red);font-weight:400}
+.fld{margin-bottom:16px}
+input,select,textarea{width:100%;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:11px 13px;font:inherit;font-size:.95rem;transition:.15s;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(63,185,80,.18)}
+textarea{min-height:150px;resize:vertical}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+.hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
+form .btn{width:100%;justify-content:center;font-size:.95rem;padding:14px}
+form .btn[disabled]{opacity:.6;cursor:wait}
+.msg{margin-top:14px;font-family:var(--mono);font-size:.82rem;min-height:1.4em}
+.msg.ok{color:var(--green)}.msg.ng{color:var(--red)}
+.note{font-size:.78rem;color:var(--muted);margin-top:10px}
 
-footer{padding:36px 0;font-family:var(--mono);font-size:.8rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer{border-top:1px solid var(--line);padding:40px 0;font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer a:hover{color:var(--fg)}
 </style>
 </head>
 <body>
 
 <nav><div class="wrap">
-  <a class="logo" href="#">plaincode</a>
+  <a class="logo" href="#"><i></i>plaincode</a>
   <ul>
     <li><a href="#services">services</a></li>
+    <li><a href="#works">works</a></li>
     <li><a href="#approach">approach</a></li>
     <li><a href="#about">about</a></li>
-    <li><a href="#contact">contact</a></li>
+    <li><a class="hot" href="#contact">contact →</a></li>
   </ul>
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <div class="tag">$ plaincode --version 2026.6.1</div>
-  <h1>ただ、コードを書く。<small>AI導入・システム開発・動画制作・AI研修を、一人で一気通貫。</small></h1>
-  <p>plaincode は、色のないコーディングをします。流行りの技術やベンダーの流儀ではなく、あなたの課題に最も素直な実装を選び、業務の整理から実装、そして使い方が定着するところまで伴走します。</p>
-  <a class="cta" href="#contact">相談する <span>→</span></a>
+  <div>
+    <div class="tag">plaincode --version 2026.6.1</div>
+    <h1>ただ、<em>コード</em>を書く。<small>AI導入・システム開発・動画制作・AI研修を、一人で一気通貫。</small></h1>
+    <p>plaincode は、色のないコーディングをします。流行りの技術やベンダーの流儀ではなく、あなたの課題に最も素直な実装を選び、業務の整理から実装、そして使い方が定着するところまで伴走します。</p>
+    <div class="ctas">
+      <a class="btn pri" href="#contact">相談する →</a>
+      <a class="btn sec" href="#services">できることを見る</a>
+    </div>
+  </div>
+  <div class="term rv">
+    <div class="bar"><i></i><i></i><i></i><span>zsh — plaincode</span></div>
+<pre id="term"></pre>
+  </div>
 </div></header>
 
 <section id="services"><div class="wrap">
-  <div class="h2">services</div>
-  <h2>できること</h2>
+  <div class="h2 rv">services</div>
+  <h2 class="rv">できること</h2>
+  <p class="sub rv">4つの領域を、ひとつのチームではなく一人で。境界がないので、AIの話がそのまま実装に、実装がそのまま研修になります。</p>
   <div class="grid">
-    <div class="card">
-      <div class="fn">ai(): <span>Solution</span></div>
+    <div class="card rv">
+      <div class="fn">ai(): <span>Solution</span><b>main</b></div>
       <h3>AI導入・業務自動化</h3>
       <p>社内AIプラットフォームの構想設計から構築まで。日々の作業をAIエージェントやチャットボットに任せ、人がやるべき仕事に時間を戻します。</p>
       <ul>
@@ -141,8 +228,8 @@ footer{padding:36px 0;font-family:var(--mono);font-size:.8rem;color:var(--muted)
         <li>AIチャットボット・画像診断など既存サービスへのAI機能追加</li>
       </ul>
     </div>
-    <div class="card">
-      <div class="fn">system(): <span>Software</span></div>
+    <div class="card rv">
+      <div class="fn">system(): <span>Software</span><b>main</b></div>
       <h3>Webサイト・業務システム開発</h3>
       <p>企業サイトから管理画面、勤怠・請求、学習プラットフォームまで。フロント・バックエンド・DB・認証・インフラを一人で設計し、本番まで運びます。</p>
       <ul>
@@ -151,8 +238,8 @@ footer{padding:36px 0;font-family:var(--mono);font-size:.8rem;color:var(--muted)
         <li>CMS連携、SEO、Vercel での本番運用まで</li>
       </ul>
     </div>
-    <div class="card">
-      <div class="fn">video(): <span>Film</span></div>
+    <div class="card rv">
+      <div class="fn">video(): <span>Film</span><b>on request</b></div>
       <h3>動画制作・YouTube運用</h3>
       <p>YouTube向け編集を100本以上納品。構成・編集・テロップから、生成AIを使った素材づくりまで。広告動画やチャンネル運用の伴走も行います。</p>
       <ul>
@@ -161,8 +248,8 @@ footer{padding:36px 0;font-family:var(--mono);font-size:.8rem;color:var(--muted)
         <li>企画・KPI設計から改善提案まで</li>
       </ul>
     </div>
-    <div class="card">
-      <div class="fn">teach(): <span>Training</span></div>
+    <div class="card rv">
+      <div class="fn">teach(): <span>Training</span><b>main</b></div>
       <h3>AI研修・教育</h3>
       <p>法人研修の設計から登壇、大学での特別講義、プログラミングスクールの講師・教材制作まで。「作れる人」が教えるから、現場で使える形で定着します。</p>
       <ul>
@@ -174,76 +261,157 @@ footer{padding:36px 0;font-family:var(--mono);font-size:.8rem;color:var(--muted)
   </div>
 </div></section>
 
-<section id="approach"><div class="wrap">
-  <div class="h2">approach</div>
-  <h2>作る・売る・教える、を一人で</h2>
-  <div class="steps">
-    <div class="step">
-      <div class="n">01</div>
-      <h3>業務を整理する</h3>
-      <p>ツールの話より先に、どこに時間が溶けているかを一緒に見ます。作らない、という結論も普通にあります。</p>
-    </div>
-    <div class="step">
-      <div class="n">02</div>
-      <h3>素直に実装する</h3>
-      <p>言語・フレームワーク・LLM は「動くか」「分かるか」で選びます。コードは全て納品し、ブラックボックスにしません。</p>
-    </div>
-    <div class="step">
-      <div class="n">03</div>
-      <h3>使える形で残す</h3>
-      <p>マニュアルと研修まで含めて、担当者が自分で回せる状態にしてから手を離します。</p>
-    </div>
+<section id="works"><div class="wrap">
+  <div class="h2 rv">works</div>
+  <h2 class="rv">最近つくったもの</h2>
+  <p class="sub rv">すべて要件定義から本番リリースまで一人で担当。守秘のため社名は伏せています。</p>
+  <div class="works">
+    <div class="work rv"><div class="cat">web / ai</div><h3>美容医療クリニック公式サイト</h3><p>撮影・デザイン・実装・公開まで。CMS更新の自動反映、AIチャットボット、写真診断を搭載。</p><div class="tags"><span>Next.js</span><span>microCMS</span><span>AI SDK</span></div></div>
+    <div class="work rv"><div class="cat">system</div><h3>クリニック管理画面・採用管理</h3><p>コンテンツCRUDとAIによる応募者スコアリング。全ルートを認証でガード。</p><div class="tags"><span>Supabase</span><span>Gemini</span></div></div>
+    <div class="work rv"><div class="cat">system / data</div><h3>経営分析ダッシュボード</h3><p>日計表CSVを解析して来院・成約を可視化。PDF帳票出力まで。</p><div class="tags"><span>Recharts</span><span>PapaParse</span></div></div>
+    <div class="work rv"><div class="cat">system</div><h3>学習プラットフォーム</h3><p>AIプログラミングスクールの受講生UIと運営管理。課題のAI一次レビューを実装。</p><div class="tags"><span>Next.js</span><span>Supabase RLS</span><span>Vimeo</span></div></div>
+    <div class="work rv"><div class="cat">system</div><h3>勤怠・請求書システム</h3><p>業務委託メンバーの打刻から請求書生成まで。トランザクションで整合性を担保。</p><div class="tags"><span>Firebase</span><span>Server Actions</span></div></div>
+    <div class="work rv"><div class="cat">ai</div><h3>社内AIプラットフォーム</h3><p>構想設計から構築まで。社内ナレッジを横断するAIアシスタントと業務エージェント。</p><div class="tags"><span>Claude</span><span>Agents</span></div></div>
   </div>
-<pre><span class="k">interface</span> <span class="t">Plaincode</span> {
-  ai():     <span class="t">Solution</span>   <span class="c">// AI導入・業務自動化</span>
-  system(): <span class="t">Software</span>   <span class="c">// Webサイト・業務システム</span>
-  video():  <span class="t">Film</span>       <span class="c">// 動画制作・YouTube</span>
-  teach():  <span class="t">Training</span>   <span class="c">// AI研修・教育</span>
-}
-<span class="c">// ✔ all passed — 全部、一人で動くところまで。</span></pre>
+</div></section>
+
+<section id="approach"><div class="wrap">
+  <div class="h2 rv">approach</div>
+  <h2 class="rv">作る・売る・教える、を一人で</h2>
+  <p class="sub rv">窓口も設計も実装も研修も同じ人間なので、伝言ゲームが起きません。</p>
+  <div class="steps">
+    <div class="step rv"><div class="n">01 / listen</div><h3>業務を整理する</h3><p>ツールの話より先に、どこに時間が溶けているかを一緒に見ます。作らない、という結論も普通にあります。</p></div>
+    <div class="step rv"><div class="n">02 / build</div><h3>素直に実装する</h3><p>言語・フレームワーク・LLM は「動くか」「分かるか」で選びます。コードは全て納品し、ブラックボックスにしません。</p></div>
+    <div class="step rv"><div class="n">03 / teach</div><h3>使える形で残す</h3><p>マニュアルと研修まで含めて、担当者が自分で回せる状態にしてから手を離します。</p></div>
+  </div>
 </div></section>
 
 <section><div class="wrap">
-  <div class="h2">facts</div>
+  <div class="h2 rv">facts</div>
   <div class="facts">
-    <div class="fact"><div class="v"><em>1</em>人</div><div class="l">要件定義から本番リリースまで</div></div>
-    <div class="fact"><div class="v"><em>100</em>+</div><div class="l">納品した動画本数</div></div>
-    <div class="fact"><div class="v"><em>100</em>名</div><div class="l">法人研修の登壇規模</div></div>
-    <div class="fact"><div class="v"><em>2</em>系統</div><div class="l">SQL / NoSQL 両DBを本番運用</div></div>
+    <div class="fact rv"><div class="v"><em>1</em>人</div><div class="l">要件定義から本番リリースまで</div></div>
+    <div class="fact rv"><div class="v"><em>100</em>+</div><div class="l">納品した動画本数</div></div>
+    <div class="fact rv"><div class="v"><em>100</em>名</div><div class="l">法人研修の登壇規模</div></div>
+    <div class="fact rv"><div class="v"><em>2</em>系統</div><div class="l">SQL / NoSQL 両DBを本番運用</div></div>
   </div>
 </div></section>
 
 <section id="about"><div class="wrap">
-  <div class="h2">about</div>
-  <h2>plaincode について</h2>
+  <div class="h2 rv">about</div>
+  <h2 class="rv">plaincode について</h2>
   <div class="about">
-    <div>
+    <div class="rv">
       <p>Claude Code、Codex、Kimi。AIコーディングツールにはそれぞれの「色」があります。plaincode はその色を全部落として、ただ単純にコードを書くことに向き合うために作った屋号です。</p>
       <p>代表の鈴木元康は、マーケティング・動画制作の現場を経てエンジニアになりました。フロントからインフラ、AI統合まで一人で完結させつつ、教える仕事も続けています。</p>
     </div>
-    <dl>
+    <dl class="rv">
       <dt>屋号</dt><dd>plaincode（プレインコード）</dd>
       <dt>代表</dt><dd>鈴木 元康 / Masayasu Suzuki</dd>
       <dt>所在地</dt><dd>東京都</dd>
       <dt>開業</dt><dd>2026年6月</dd>
-      <dt>stack</dt><dd>TypeScript / Next.js / React / Supabase / Firebase / Vercel / Claude・Gemini・DeepSeek</dd>
+      <dt>stack</dt><dd class="stack"><span>TypeScript</span><span>Next.js</span><span>React</span><span>Supabase</span><span>Firebase</span><span>Vercel</span><span>Claude</span><span>Gemini</span><span>DeepSeek</span></dd>
       <dt>links</dt><dd><a href="https://x.com/masakundayo1994" target="_blank" rel="me noopener">X</a> ／ <a href="https://github.com/masayasusuzuki" target="_blank" rel="me noopener">GitHub</a></dd>
     </dl>
   </div>
 </div></section>
 
 <section id="contact" class="contact"><div class="wrap">
-  <div class="h2" style="text-align:center">contact</div>
-  <h2>まずは、困っていることを聞かせてください</h2>
-  <p>「これAIでどうにかならない？」の段階で大丈夫です。作るべきかどうかから一緒に考えます。</p>
-  <a class="btn" href="mailto:masayasusuzuki@plaincode.work?subject=%E3%81%94%E7%9B%B8%E8%AB%87">メールで相談する</a>
-  <div class="sub"><a href="mailto:masayasusuzuki@plaincode.work">masayasusuzuki@plaincode.work</a></div>
+  <div class="side rv">
+    <div class="h2">contact</div>
+    <h2>まずは、困っていることを聞かせてください</h2>
+    <p>「これAIでどうにかならない？」の段階で大丈夫です。作るべきかどうかから一緒に考えます。</p>
+    <ul>
+      <li>2営業日以内に返信します</li>
+      <li>初回のオンライン相談（30分）は無料</li>
+      <li>費用は時間単価型・全開示。コードは全て納品</li>
+    </ul>
+    <div class="alt">mail: <a href="mailto:masayasusuzuki@plaincode.work">masayasusuzuki@plaincode.work</a></div>
+  </div>
+  <form id="cf" class="rv" novalidate>
+    <div class="f2">
+      <div class="fld"><label for="name">お名前 <b>*</b></label><input id="name" name="name" required autocomplete="name"></div>
+      <div class="fld"><label for="company">会社名・屋号</label><input id="company" name="company" autocomplete="organization"></div>
+    </div>
+    <div class="f2">
+      <div class="fld"><label for="email">メールアドレス <b>*</b></label><input id="email" name="email" type="email" required autocomplete="email"></div>
+      <div class="fld"><label for="type">ご相談の種類</label>
+        <select id="type" name="type">
+          <option>AI導入・業務自動化</option>
+          <option>Webサイト・システム開発</option>
+          <option>動画制作</option>
+          <option>AI研修・教育</option>
+          <option>その他・まだ決まっていない</option>
+        </select>
+      </div>
+    </div>
+    <div class="fld"><label for="message">内容 <b>*</b></label><textarea id="message" name="message" required placeholder="困っていること、やりたいこと、時期や予算感など。ざっくりで大丈夫です。"></textarea></div>
+    <div class="hp" aria-hidden="true"><label for="website">website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+    <button class="btn pri" type="submit">送信する →</button>
+    <div class="msg" id="msg" role="status" aria-live="polite"></div>
+    <div class="note">送信いただいた内容は、ご相談への返信以外の目的には使用しません。</div>
+  </form>
 </div></section>
 
-<footer class="wrap">
+<footer><div class="wrap">
   <span>© 2026 plaincode</span>
-  <span>Tokyo, Japan</span>
-</footer>
+  <span><a href="https://x.com/masakundayo1994" target="_blank" rel="me noopener">X</a> ・ <a href="https://github.com/masayasusuzuki" target="_blank" rel="me noopener">GitHub</a> ・ Tokyo, Japan</span>
+</div></footer>
 
+<script>
+// ---- scroll reveal ----
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// ---- card spotlight ----
+document.querySelectorAll('.card').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+
+// ---- terminal typing ----
+const lines=[
+ ['<span class="p">$</span> plaincode init --client "あなたの会社"'],
+ ['<span class="c">✔ 業務を整理しました（作らない案 1件）</span>'],
+ [''],
+ ['<span class="k">interface</span> <span class="t">Plaincode</span> {'],
+ ['  ai():     <span class="t">Solution</span>   <span class="c">// AI導入・業務自動化</span>'],
+ ['  system(): <span class="t">Software</span>   <span class="c">// Webサイト・業務システム</span>'],
+ ['  video():  <span class="t">Film</span>       <span class="c">// 動画制作・YouTube</span>'],
+ ['  teach():  <span class="t">Training</span>   <span class="c">// AI研修・教育</span>'],
+ ['}'],
+ [''],
+ ['<span class="p">$</span> plaincode deploy --prod'],
+ ['<span class="c">✔ all passed</span>  <span class="o">一人で、動くところまで。</span>'],
+];
+const term=document.getElementById('term');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduce){term.innerHTML=lines.map(l=>l[0]).join('\n')}
+else{
+  let i=0;
+  const step=()=>{
+    if(i>=lines.length){term.innerHTML+='<span class="cur"></span>';return}
+    const l=lines[i++][0];
+    term.innerHTML+=l+'\n';
+    setTimeout(step,l===''?120:(l.startsWith('<span class="p">')?520:180));
+  };
+  setTimeout(step,500);
+}
+
+// ---- contact form ----
+const f=document.getElementById('cf'),msg=document.getElementById('msg');
+f.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const d=Object.fromEntries(new FormData(f).entries());
+  if(!d.name||!d.email||!d.message){msg.className='msg ng';msg.textContent='× お名前・メール・内容は必須です';return}
+  const btn=f.querySelector('button');btn.disabled=true;msg.className='msg';msg.textContent='sending…';
+  try{
+    const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
+    const j=await r.json().catch(()=>({}));
+    if(r.ok&&j.ok){msg.className='msg ok';msg.textContent='✔ 送信しました。2営業日以内にご返信します。';f.reset()}
+    else{throw new Error(j.error||'send')}
+  }catch(err){
+    msg.className='msg ng';
+    const body=encodeURIComponent(`お名前: ${d.name}\n会社: ${d.company||''}\n種別: ${d.type||''}\n\n${d.message}`);
+    msg.innerHTML=`× 送信に失敗しました。お手数ですが <a href="mailto:masayasusuzuki@plaincode.work?subject=${encodeURIComponent('ご相談 / '+d.name)}&body=${body}" style="text-decoration:underline">メールで送る</a> をお試しください。`;
+  }finally{btn.disabled=false}
+});
+</script>
 </body>
 </html>
